@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQ - Coming Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'MainFont';
+            src: url(main.otf);
+        }
+
+        body {
+            font-family: 'DM Serif Display', serif;
+            background: black;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 2rem;
+            margin-top: -200px;
+            align-items: flex-start;
+        }
+
+        .title {
+            font-size: 12rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'MainFont';
+        }
+
+        .subtitle {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .time-unit {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 1.2rem;
+            min-width: 120px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .time-number {
+            font-size: 2.6rem;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-label {
+            font-size: 1rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+
+            .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+
+            .title {
+                font-size: 6rem;
+                margin-top: 100px;
+            }
+
+            .subtitle {
+                font-size: 2rem;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .time-number {
+                font-size: 2rem;
+            }
+
+            .countdown {
+                display: none;
+            }
+
+            .countdown-mobile {
+                display: flex !important;
+                justify-content: center;
+                gap: 0.7rem;
+                flex-wrap: wrap;
+                width: fit-content;
+                scale: 0.9;
+            }
+
+            .countdown-mobile .time-unit {
+                min-width: 80px;
+                max-width: 100px;
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .countdown-mobile .time-number {
+                font-size: 1.5rem;
+            }
+            .countdown-mobile .time-label {
+                font-size: 0.6rem;
+            }
+
+            .bg-image {
+                width: 70% !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <img class="bg-image" src="p1tower.png" alt="" style="position: absolute; width: 45%; bottom: 0; right: 0; opacity: 0.2;">
+    <div class="container">
+        <h1 class="title">HQ</h1>
+        <h1 class="subtitle">Coming Soon</h1>
+
+        <div class="countdown">
+            <div class="time-unit">
+                <span class="time-number days">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number minutes">00</span>
+                <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number seconds">00</span>
+                <span class="time-label">Seconds</span>
+            </div>
+        </div>
+
+        <div class="countdown-mobile" style="display: none;">
+            <div class="time-unit">
+                <span class="time-number days">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number minutes">00</span>
+                <span class="time-label">Mins</span>
+            </div>
+            <div class="time-unit">
+                <span class="time-number seconds">00</span>
+                <span class="time-label">Secs</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const targetDate = new Date('October 30, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.querySelectorAll('.days').forEach(el => el.textContent = days.toString().padStart(2, '0'));
+                document.querySelectorAll('.hours').forEach(el => el.textContent = hours.toString().padStart(2, '0'));
+                document.querySelectorAll('.minutes').forEach(el => el.textContent = minutes.toString().padStart(2, '0'));
+                document.querySelectorAll('.seconds').forEach(el => el.textContent = seconds.toString().padStart(2, '0'));
+            } else {
+                document.querySelectorAll('.days').forEach(el => el.textContent = '00');
+                document.querySelectorAll('.hours').forEach(el => el.textContent = '00');
+                document.querySelectorAll('.minutes').forEach(el => el.textContent = '00');
+                document.querySelectorAll('.seconds').forEach(el => el.textContent = '00');
+            }
+        }
+
+        updateCountdown();
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+
+</html>
